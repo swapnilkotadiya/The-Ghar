@@ -38,13 +38,13 @@ namespace The_Ghar.Areas.Admin_Side.Controllers
         }
         #endregion
 
-        #region "Home Add"
+        #region Home Add
         public IActionResult HomeAdd(int HomeID)
         {
             if (HomeID != null)
             {
 
-                DataTable dt = dalHome.dbo_PR_Admin_GetValue_For_Edit(HomeID);
+                DataTable dt = dalHome.dbo_PR_Home_GetValue_For_Edit(HomeID);
                 HomeModel modelHome = new HomeModel();
                 if (dt.Rows.Count > 0)
                 {
@@ -52,43 +52,55 @@ namespace The_Ghar.Areas.Admin_Side.Controllers
                     foreach (DataRow dr in dt.Rows)
                     {
 
-                        modelAdmin.AdminID = Convert.ToInt32(dr["AdminID"]);
-                        modelAdmin.Name = (string)dr["Name"];
-                        modelAdmin.Email = (string)dr["Email"];
-                        modelAdmin.Password = (string)dr["Password"];
-                        modelAdmin.CreationDate = Convert.ToDateTime(dr["CreationDate"]);
-                        modelAdmin.ModificationDate = Convert.ToDateTime(dr["ModificationDate"]);
+                        modelHome.HomeID = Convert.ToInt32(dr["HomeID"]);
+                        modelHome.HomeName = (string)dr["HomeName"];
+                        modelHome.Email = (string)dr["Email"];
+                        modelHome.AreaLocation = (string)dr["AreaLocation"];
+                        modelHome.Mobile = (string)dr["Mobile"];
+                        modelHome.Logo = (string)dr["Logo"];
+                        modelHome.StateID = Convert.ToInt32(dr["StateID"]);
+                        modelHome.CityID = Convert.ToInt32(dr["CityID"]);
+                        modelHome.CostPerPerson = (string)dr["CostPerPerson"];
+                        modelHome.Categories = (string)dr["Categories"];
+                        modelHome.CreationDate = Convert.ToDateTime(dr["CreationDate"]);
+                        modelHome.ModificationDate = Convert.ToDateTime(dr["ModificationDate"]);
+                        modelHome.HomeOwnerID = Convert.ToInt32(dr["HomeOwnerID"]);
+                        modelHome.OwnerName = (string)dr["OwnerName"];
+                        modelHome.OwnerEmail = (string)dr["OwnerEmail"];
+                        modelHome.OwnerMobile = (string)dr["OwnerMobile"];
+                        modelHome.Password = (string)dr["Password"];
+
                     }
 
                     return View("HomeAddEdit", modelHome);
                 }
             }
-            return View("AdminAddEdit");
+            return View("HomeAddEdit");
         }
 
         #endregion
 
-        #region "AdminSave"
+        #region Save
 
-        public IActionResult AdminSave(AdminModel modelAdmin)
+        public IActionResult HomeSave(HomeModel modelHome)
         {
 
 
 
-            if (modelAdmin.AdminID == 0)
+            if (modelHome.HomeID == 0 && modelHome.HomeOwnerID == 0)
             {
-                DataTable dt = dalAdmin.dbo_PR_Admin_Insert(modelAdmin);
-                TempData["AdminInsertMsg"] = "Record Inserted Successfully";
+                DataTable dt = dalHome.dbo_PR_Home_And_HomeOwner_Insert(modelHome);
+                TempData["HomeInsertMsg"] = "Record Inserted Successfully";
             }
             else
             {
-                DataTable dt = dalAdmin.dbo_PR_Admin_UpdateByPK(modelAdmin);
-                TempData["AdminUpdateMsg"] = "Record Updated Successfully";
+                DataTable dt = dalHome.dbo_PR_Home_UpdateByPK(modelHome);
+                TempData["HomeUpdateMsg"] = "Record Updated Successfully";
             }
 
 
 
-            return View("AdminAddEdit");
+            return View("HomeAddEdit");
 
         }
         #endregion
