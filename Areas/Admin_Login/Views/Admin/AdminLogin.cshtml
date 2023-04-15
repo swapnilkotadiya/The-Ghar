@@ -1,0 +1,24 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@using The_Ghar.Areas.Admin_Login.Controllers;
+@using The_Ghar.Areas.Admin_Login.Models;
+@model Admin_LoginModel
+<link href='https://fonts.googleapis.com/css?family=Lobster' rel='stylesheet' type='text/css'>
+<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+<link href='https://fonts.googleapis.com/css?family=Raleway:400,800,700,900,300,100' rel='stylesheet' type='text/css'>
+<link href="~/admin_login.css" rel="stylesheet" />
+<div class="overlay">
+    <div class="wrap">
+        <form method="post" asp-area="Admin_Login" asp-controller="Admin" asp-action="Login">
+            <h1>Admin</h1>
+            <input type="email" placeholder="Email" asp-for="Email">
+            <input type ="password"placeholder="Password" asp-for="Password">
+            <input type="submit" value="Sign In">
+       </form>
+       
+    </div>
+</div>
+

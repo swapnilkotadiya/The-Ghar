@@ -1,0 +1,39 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <RootNamespace>The_Ghar</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Areas\HomePage\Data\**" />
+    <Content Remove="Areas\HomePage\Data\**" />
+    <EmbeddedResource Remove="Areas\HomePage\Data\**" />
+    <None Remove="Areas\HomePage\Data\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Remove="wwwroot\login_signup.css" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Areas\HomePage\Views\Page\" />
+    <Folder Include="Areas\Owner_Login\Controllers\" />
+    <Folder Include="Areas\Owner_Login\Data\" />
+    <Folder Include="Areas\Owner_Login\Models\" />
+    <Folder Include="Areas\Owner_Login\Views\" />
+    <Folder Include="Areas\Owner_Side\Controllers\" />
+    <Folder Include="Areas\Owner_Side\Data\" />
+    <Folder Include="Areas\Owner_Side\Models\" />
+    <Folder Include="Areas\Owner_Side\Views\" />
+    <Folder Include="wwwroot\admin_side\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="EnterpriseLibrary.Data.NetCore" Version="6.3.2" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.13" />
+  </ItemGroup>
+
+</Project>

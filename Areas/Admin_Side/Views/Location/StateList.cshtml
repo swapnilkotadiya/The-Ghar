@@ -1,0 +1,124 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    ViewData["Title"] = "State";
+    Layout = "~/Views/Shared/_Layout_Admin_Side.cshtml";
+}
+@using System.Data
+@model DataTable
+<link href="~/datatables/css/datatables.bootstrap4.min.css" rel="stylesheet" />
+<link href="~/datatables/css/jquery.datatables.min.css" rel="stylesheet" />
+<link href="~/datatables/css/responsive.datatables.min.css" rel="stylesheet" />
+<link rel="stylesheet" type="text/css" href="~/datatables/vendors/styles/icon-font.min.css" />
+<link rel="stylesheet" type="text/css" href="~/datatables/css/dataTables.bootstrap4.min.css" />
+<link href="~/datatables/vendors/styles/icon-font.css" rel="stylesheet" />
+<link href="~/datatables/vendors/styles/icon-font.min.css" rel="stylesheet" />
+<link href="~/datatables>
+
+<div class="container-fluid py-4">
+    <div class="row" style="width:100%;">
+        <div class="col-12">
+            <div class="card mb-4">
+                <div class="card-header pb-0">
+                    <div class="row align-items-center">
+                        <div class="col">
+                            <h6>States</h6>
+                        </div>
+                        <div class="col-auto" style="margin-bottom:15px;">
+                            <a asp-area="Admin_Side" asp-controller="Location" asp-action="StateAdd" class="btn btn-outline-primary btn-sm mb-0">Add State</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card-body px-0 pt-0 pb-2">
+                    <div class="table-responsive p-0">
+                        <table class="table align-items-center mb-0   data-table-export ">
+                            <thead>
+                                <tr>
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">State Name</th>
+
+                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                        Creation Date
+                                    </th>
+                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                        Modification Date
+                                    </th>
+                                    <th class=" text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 datatable-nosort">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            @foreach (DataRow dr in Model.Rows)
+                            {
+                                    <tr>
+                                        <td>
+                                            <div class="d-flex px-2 py-1">
+
+                                                <div class="d-flex flex-column justify-content-center">
+                                                    <p class="text-xs font-weight-bold mb-0">@dr["StateName"]</p>
+                                                </div>
+                                            </div>
+                                        </td>
+
+                                        <td class="align-middle text-center text-sm">
+                                            <p class="text-xs font-weight-bold mb-0">@dr["CreationDate"]</p>
+                                        </td>
+                                        <td class="align-middle text-center">
+                                            <p class="text-xs font-weight-bold mb-0">@dr["ModificationDate"]</p>
+                                        </td>
+                                        <td class="align-middle">
+                                            <div style="position: relative;">
+                                                <div class="btn btn-link font-24 p-0 line-height-1 no-arrow text-center align-middle">
+                                                    <div class="align-middle text-center">
+                                                        <form asp-area="Admin_Side" asp-controller="Location" asp-action="StateDelete">
+                                                            <a class="text-uppercase text-secondary text-xxs font-weight-bolder" asp-area="Admin_Side" asp-controller="Location" asp-action="StateAdd" asp-route-stateid="@Convert.ToInt32(dr["StateID"])">
+                                                            <i class="dw dw-edit2"></i>
+                                                            Edit
+                                                        </a>
+                                                        &nbsp;
+
+
+                                                            <input type="hidden" name="StateID" value="@Convert.ToInt32(dr["StateID"])" />
+                                                            <button type="submit"  class=" text-uppercase text-secondary text-xxs font-weight-bolder" style="border:none;background-color: #fff;" onclick="fun1(event)">
+                                                            
+                                                            <i class="dw dw-delete-3"></i>
+                                                            
+                                                            Delete
+                                                        </button>
+                                                        </form>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </td>
+                                    </tr>
+                            }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+
+<script src="~/datatables/vendors/scripts/core.js"></script>
+<script src="~/datatables/vendors/scripts/script.min.js"></script>
+<script src="~/datatables/vendors/scripts/process.js"></script>
+<script src="~/datatables/vendors/scripts/layout-settings.js"></script>
+<script src="~/datatables/js/jquery.dataTables.min.js"></script>
+<script src="~/datatables/js/dataTables.bootstrap4.min.js"></script>
+<script src="~/datatables/js/dataTables.responsive.min.js"></script>
+<script src="~/datatables/js/responsive.bootstrap4.min.js"></script>
+<!-- buttons for Export datatable -->
+<script src="~/datatables/js/dataTables.buttons.min.js"></script>
+<script src="~/datatables/js/buttons.bootstrap4.min.js"></script>
+<script src="~/datatables/js/buttons.print.min.js"></script>
+<script src="~/datatables/js/buttons.html5.min.js"></script>
+<script src="~/datatables/js/buttons.flash.min.js"></script>
+<script src="~/datatables/js/pdfmake.min.js"></script>
+<script src="~/datatables/js/vfs_fonts.js"></script>
+<!-- Datatable Setting js -->
+<script src="~/datatables/vendors/scripts/datatable-setting.js"></script>

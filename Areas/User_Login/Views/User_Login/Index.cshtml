@@ -1,0 +1,265 @@
+﻿
+@*
+
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout_Login.cshtml";
+}
+
+@using System.Data;
+@using The_Ghar.Areas.User_Login.Models;
+@using The_Ghar.Areas.User_Login.Controllers;
+@model User_LoginModel
+<!-- BEGIN LOGO -->
+<div class="logo">
+    <h2 class="bold text-danger">Address Book</h2>
+</div>
+<!-- END LOGO -->
+<!-- BEGIN LOGIN -->
+<div class="content">
+    <!-- BEGIN LOGIN FORM -->
+    <form class="login-form" method="post" asp-area="User_Login" asp-controller="User_Login" asp-action="Login">
+        <h3 class="form-title font-green">Sign In</h3>
+
+        @if (TempData["Error"] != null)
+        {
+            <div class="text-danger">@Html.Raw(TempData["Error"]) </div>
+        }
+
+        <div class="form-group">
+            <!--ie8, ie9 does not support html5 placeholder, so we just show field title for that-->
+            <label class="control-label visible-ie8 visible-ie9">Email</label>
+            <input class="form-control form-control-solid placeholder-no-fix" type="text" asp-for="Email" placeholder="Enter Email" />
+            <span asp-validation-for="Email" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label class="control-label visible-ie8 visible-ie9">Password</label>
+            <input class="form-control form-control-solid placeholder-no-fix" type="password" asp-for="Password" placeholder="Enter Password" />
+            <span asp-validation-for="Password" class="text-danger"></span>
+        </div>
+        <div class="form-actions text-center">
+            <button type="submit" class="btn green uppercase">Login</button>
+        </div>
+    </form>
+    <!-- END LOGIN FORM -->
+</div>
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
+
+*@
+
+
+
+
+@{
+    ViewData["Title"] = "Login/SignUp";
+    Layout = "~/Views/Shared/_Layout_Login.cshtml";
+}
+
+
+@using System.Data;
+@using The_Ghar.Areas.User_Login.Models;
+@using The_Ghar.Areas.User_Login.Controllers;
+@model User_LoginModel
+<!-- BEGIN LOGO -->
+<!-- END LOGO -->
+<!-- BEGIN LOGIN -->
+<link href="~/login.css" rel="stylesheet" />
+<link href="~/login2.css" rel="stylesheet" />
+@if (TempData["Error"] != null)
+{
+    <div class="text-danger">@Html.Raw(TempData["Error"]) </div>
+}
+
+<meta content="width=device-width, initial-scale=1" name="viewport" />
+<div class="container1"></div>
+<div class="modal1">
+    <div class="modal1-container">
+        <div class="modal1-left">
+
+            <div class="container" id="container">
+                @Html.HiddenFor(x=>x.UserID)
+                <div class="form-container sign-up-container">
+                    <form method="post" asp-area="User_Login" asp-controller="User_Login" asp-action="UserRegister">
+                        
+                        <h1>Create Account</h1>
+
+                        <span>use your email for registration</span>
+                        <input type="text" placeholder="Name" asp-for="Name" />
+                        <input type="email" placeholder="Email" asp-for="Email" />
+                        <input type="password" placeholder="Password" asp-for="Password" />
+                        <input type="text" placeholder="Mobile" asp-for="Mobile" />
+
+                        <select class="form-control" style="background-color: #eee;
+    border: none;
+    padding: 12px 15px;
+    margin: 8px 0;
+    width: 100%;" asp-for="StateID" asp-items="@(new SelectList(ViewBag.StateList,"StateID","StateName"))" onchange="fnOnCityChange();">
+                            <option style="background-color: #eee; border:none; padding: 12px 15px;" value="">State</option>
+                        </select>
+
+
+                        <select class="form-control" style="background-color: #eee;
+    border: none;
+    padding: 12px 15px;
+    margin: 8px 0;
+    width: 100%;" asp-for="CityID" asp-items="@(new SelectList(ViewBag.CityList,"CityID","CityName"))">
+                            <option style="background-color: #eee;
+    border: none;
+    padding: 12px 15px;
+    margin: 8px 0;
+    width: 100%;" value="">City</option>
+                        </select>
+                        <input type="text" placeholder="Address" asp-for="Address" />
+                        <button type="submit">Sign Up</button>
+                    </form>
+                </div>
+                <div class="form-container sign-in-container">
+                    <form method="post" asp-area="User_Login" asp-controller="User_Login" asp-action="Login">
+                        <h1>Sign in</h1>
+                        <input type="email" placeholder="Email" asp-for="Email" />
+                        <input type="password" placeholder="Password" asp-for="Password" />
+                        <a href="#">Owner? Login here</a>
+                        <a asp-area="Admin_Login" asp-controller="Admin" asp-action="AdminLogin">Admin? Login here</a>
+
+                        <button type="submit">Sign In</button>
+                        @TempData["Error"]
+                    </form>
+                </div>
+
+                <div class="overlay-container">
+                    <div class="overlay">
+                        <div class="overlay-panel overlay-left" style="margin-top:40px">
+                            <h1 style="padding-top:20px">Welcome Back!</h1>
+                            <p>To keep connected with us please login with your personal info</p>
+                            <button class="ghost" id="signIn">Sign In</button>
+                        </div>
+                        <div class="overlay-panel overlay-right" style="margin-top:46px">
+                            <!-- <h1>Hello, Friend!</h1> -->
+                            <p style="color: rgba(255, 255, 255,1)">
+                                "Join the feast and sign up now for
+                                exclusive access
+                                to
+                                our
+                                delicious world of
+                                flavors!"
+                            </p>
+                            <button class="ghost" id="signUp">Sign Up</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- <footer>
+                <p>
+                    Created with <i class="fa fa-heart"></i> by
+                    <a target="_blank" href="https://florin-pop.com">Florin Pop</a>
+                    - Read how I created this and how you can join the challenge
+                    <a target="_blank"
+                        href="https://www.florin-pop.com/blog/2019/03/double-slider-sign-in-up-form/">here</a>.
+                </p>
+            </footer> -->
+        </div>
+        <!-- <div class="modal1-right">
+            <img src="https://images.unsplash.com/photo-1512486130939-2c4f79935e4f?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=dfd2ec5a01006fd8c4d7592a381d3776&auto=format&fit=crop&w=1000&q=80"
+                alt="">
+        </div> -->
+        <button class="icon-button close-button">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50">
+                <path d="M 25 3 C 12.86158 3 3 12.86158 3 25 C 3 37.13842 12.86158 47 25 47 C 37.13842 47 47 37.13842 47 25 C 47 12.86158 37.13842 3 25 3 z M 25 5 C 36.05754 5 45 13.94246 45 25 C 45 36.05754 36.05754 45 25 45 C 13.94246 45 5 36.05754 5 25 C 5 13.94246 13.94246 5 25 5 z M 16.990234 15.990234 A 1.0001 1.0001 0 0 0 16.292969 17.707031 L 23.585938 25 L 16.292969 32.292969 A 1.0001 1.0001 0 1 0 17.707031 33.707031 L 25 26.414062 L 32.292969 33.707031 A 1.0001 1.0001 0 1 0 33.707031 32.292969 L 26.414062 25 L 33.707031 17.707031 A 1.0001 1.0001 0 0 0 32.980469 15.990234 A 1.0001 1.0001 0 0 0 32.292969 16.292969 L 25 23.585938 L 17.707031 16.292969 A 1.0001 1.0001 0 0 0 16.990234 15.990234 z">
+                </path>
+            </svg>
+        </button>
+    </div>
+    <button class="modal1-button">Click here to login</button>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
+
+<script>
+
+    function fnOnCityChange() {
+        var StateID = $("#StateID").val();
+        if (StateID !== "") {
+            $("#CityID").empty();
+            $("#CityID").append($("<option></option").val("").html("Select City"));
+            $.ajax(
+                {
+                    type: "POST",
+                    contentType: "application/json; charset=utf-8",
+                    url: "@Url.Action("DropDownByStateForCity","User_Login")" + "?&StateID=" + StateID,
+                    data: {},
+                    dataType: "json",
+                    success: function (Result) {
+                        $.each(Result,
+                            function (key, value) {
+                                $("#CityID").append($("<option></option>").val(value.cityID).html(value.cityName));
+                            });
+                    },
+                    error: function (r) {
+                        alert("Error while loading combobox.");
+                    }
+
+                });
+
+        } else {
+            $("#CityID").empty();
+            $("#CityID").append($("<option></option>").val("").html("Select City"));
+        }
+    }
+
+
+
+    const body = document.querySelector("body");
+    const modal1 = document.querySelector(".modal1");
+    const modal1Button = document.querySelector(".modal1-button");
+    const closeButton = document.querySelector(".close-button");
+
+    let isOpened = false;
+
+    const openmodal1 = () => {
+        modal1.classList.add("is-open");
+        body.style.overflow = "hidden";
+    };
+
+    const closemodal1 = () => {
+        modal1.classList.remove("is-open");
+        body.style.overflow = "initial";
+    };
+
+    window.addEventListener("scroll", () => {
+        if (window.scrollY > window.innerHeight / 3 && !isOpened) {
+            isOpened = true;
+            scrollDown.style.display = "none";
+            openmodal1();
+        }
+    });
+
+    modal1Button.addEventListener("click", openmodal1);
+    closeButton.addEventListener("click", closemodal1);
+
+    document.onkeydown = evt => {
+        evt = evt || window.event;
+        evt.keyCode === 27 ? closemodal1() : false;
+    };
+    const signUpButton = document.getElementById('signUp');
+    const signInButton = document.getElementById('signIn');
+    const container = document.getElementById('container');
+
+    signUpButton.addEventListener('click', () => {
+        container.classList.add("right-panel-active");
+    });
+
+    signInButton.addEventListener('click', () => {
+        container.classList.remove("right-panel-active");
+    });
+
+</script>
