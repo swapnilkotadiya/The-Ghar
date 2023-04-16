@@ -16,15 +16,19 @@
 
         public int StateID { get; set; }
 
+        public string StateName { get; set; }
+
+        public string CityName { get; set; }
+
         public int CityID { get; set; }
 
         public string CostPerPerson { get; set; }
 
         public string Categories { get; set; }
 
-        public DateTime CreationDate { get; set; }
+        public DateTime? CreationDate { get; set; }
 
-        public DateTime ModificationDate { get; set; }
+        public DateTime? ModificationDate { get; set; }
 
         public int HomeOwnerID { get; set; }
 
@@ -35,6 +39,9 @@
         public string OwnerMobile { get; set; }
 
         public string Password { get; set; }
+
+        public IFormFile File { get; set; }
+
 
 
     }

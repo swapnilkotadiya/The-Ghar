@@ -113,8 +113,12 @@ table.dataTable > tbody > tr.child {
 
     table.dataTable > tbody > tr.child span.dtr-title {
         display: inline-block;
-        min-width: 75px;
-        font-weight: bold
+        text-align: center !important;
+        text-transform: uppercase !important;
+        color: #8392AB !important;
+        opacity: 0.7 !important;
+        font-size: 0.65rem !important;
+        font-weight: 700 !important;
     }
 
 div.dtr-modal {
