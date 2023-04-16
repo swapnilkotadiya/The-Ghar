@@ -77,8 +77,6 @@ namespace The_Ghar.DAL
 
         #endregion
 
-
-
         #region State Delete
         public DataTable dbo_PR_State_DeleteByPK(int StateID)
         {
@@ -597,6 +595,160 @@ namespace The_Ghar.DAL
                 sqlDB.AddInParameter(dbCmd, "OwnerEmail", SqlDbType.NVarChar, model.OwnerEmail);
                 sqlDB.AddInParameter(dbCmd, "OwnerMobile", SqlDbType.NVarChar, model.OwnerMobile);
                 sqlDB.AddInParameter(dbCmd, "Password", SqlDbType.NVarChar, model.Password);
+
+
+
+                DataTable dt = new DataTable();
+
+                using (IDataReader dr = sqlDB.ExecuteReader(dbCmd))
+                {
+                    dt.Load(dr);
+
+                }
+                return dt;
+            }
+            catch (Exception e)
+            {
+
+                return null;
+
+            }
+        }
+        #endregion
+
+        #region User Select All
+        public DataTable dbo_PR_Users_SelectAll()
+        {
+            try
+            {
+                SqlDatabase sqlDB = new SqlDatabase(myConnectionString);
+                DbCommand dbCmd = sqlDB.GetStoredProcCommand("dbo.PR_Users_SelectAll");
+
+                DataTable dt = new DataTable();
+                using (IDataReader dr = sqlDB.ExecuteReader(dbCmd))
+                {
+                    dt.Load(dr);
+                }
+                return dt;
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
+
+        #endregion
+
+        #region Home Delete
+        public DataTable dbo_PR_Users_DeleteByPK(int UserID)
+        {
+            try
+            {
+                SqlDatabase sqlDB = new SqlDatabase(myConnectionString);
+                DbCommand dbCMD = sqlDB.GetStoredProcCommand("dbo.PR_Users_DeleteByPK");
+                sqlDB.AddInParameter(dbCMD, "UserID", SqlDbType.Int, UserID);
+
+                DataTable dt = new DataTable();
+                using (IDataReader dr = sqlDB.ExecuteReader(dbCMD))
+                {
+                    dt.Load(dr);
+                }
+                return dt;
+            }
+            catch (Exception e)
+            {
+
+                return null;
+
+            }
+        }
+        #endregion
+
+        #region Home Edit
+
+        public DataTable dbo_PR_Users_GetValue_For_Edit(int UserID)
+        {
+            try
+            {
+                SqlDatabase sqlDB = new SqlDatabase(myConnectionString);
+                DbCommand dbCmd = sqlDB.GetStoredProcCommand("dbo.PR_Users_GetValue_For_Edit");
+                sqlDB.AddInParameter(dbCmd, "UserID", SqlDbType.Int, UserID);
+                DataTable dt = new DataTable();
+                using (IDataReader dr = sqlDB.ExecuteReader(dbCmd))
+                {
+                    dt.Load(dr);
+
+                }
+
+                return dt;
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
+
+        #endregion
+
+        #region Home Insert
+        public DataTable dbo_PR_Users_Insert(UserModel model)
+        {
+            try
+            {
+                SqlDatabase sqlDB = new SqlDatabase(myConnectionString);
+                DbCommand dbCmd = sqlDB.GetStoredProcCommand("dbo.PR_Users_Insert");
+
+
+                sqlDB.AddInParameter(dbCmd, "Name", SqlDbType.NVarChar, model.Name);
+                sqlDB.AddInParameter(dbCmd, "Email", SqlDbType.NVarChar, model.Email);
+                sqlDB.AddInParameter(dbCmd, "Password", SqlDbType.NVarChar, model.Password);
+                sqlDB.AddInParameter(dbCmd, "Address", SqlDbType.NVarChar, model.Address);
+                sqlDB.AddInParameter(dbCmd, "Mobile", SqlDbType.NVarChar, model.Mobile);
+                sqlDB.AddInParameter(dbCmd, "LastLoginDate", SqlDbType.DateTime, model.LastLoginDate = null);
+                sqlDB.AddInParameter(dbCmd, "RegistrationDate", SqlDbType.DateTime, model.RegistrationDate = null);
+                sqlDB.AddInParameter(dbCmd, "CreationDate", SqlDbType.DateTime, model.CreationDate = null);
+                sqlDB.AddInParameter(dbCmd, "ModificationDate", SqlDbType.DateTime, model.ModificationDate = null);
+                sqlDB.AddInParameter(dbCmd, "StateID", SqlDbType.Int, model.StateID);
+                sqlDB.AddInParameter(dbCmd, "CityID", SqlDbType.Int, model.CityID);
+
+
+                DataTable dt = new DataTable();
+
+                using (IDataReader dr = sqlDB.ExecuteReader(dbCmd))
+                {
+                    dt.Load(dr);
+
+
+
+                }
+                return dt;
+            }
+            catch (Exception e)
+            {
+
+                return null;
+
+            }
+        }
+        #endregion
+
+        #region Home Update
+        public DataTable dbo_PR_Users_UpdateByPK(UserModel model)
+        {
+            try
+            {
+                SqlDatabase sqlDB = new SqlDatabase(myConnectionString);
+                DbCommand dbCmd = sqlDB.GetStoredProcCommand("dbo.PR_Users_UpdateByPK");
+
+                sqlDB.AddInParameter(dbCmd, "UserID", SqlDbType.Int, model.UserID);
+                sqlDB.AddInParameter(dbCmd, "Name", SqlDbType.NVarChar, model.Name);
+                sqlDB.AddInParameter(dbCmd, "Email", SqlDbType.NVarChar, model.Email);
+                sqlDB.AddInParameter(dbCmd, "Password", SqlDbType.NVarChar, model.Password);
+                sqlDB.AddInParameter(dbCmd, "Address", SqlDbType.NVarChar, model.Address);
+                sqlDB.AddInParameter(dbCmd, "Mobile", SqlDbType.NVarChar, model.Mobile);
+                sqlDB.AddInParameter(dbCmd, "ModificationDate", SqlDbType.DateTime, model.ModificationDate = null);
+                sqlDB.AddInParameter(dbCmd, "StateID", SqlDbType.Int, model.StateID);
+                sqlDB.AddInParameter(dbCmd, "CityID", SqlDbType.Int, model.CityID);
 
 
 

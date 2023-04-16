@@ -22,25 +22,25 @@ namespace The_Ghar.Areas.Admin_Side.Controllers
         #region User Select All
         public IActionResult UserList()
         {
-            DataTable dt = dalUSER.dbo_PR_User_SelectAll();
+            DataTable dt = dalUSER.dbo_PR_Users_SelectAll();
             return View("UserList", dt);
         }
         #endregion
 
         #region User Delete
-        public IActionResult UserDelete(int HomeID)
+        public IActionResult UserDelete(int UserID)
         {
 
 
-            DataTable dt = dalUSER.dbo_PR_Home_DeleteByPK(HomeID);
+            DataTable dt = dalUSER.dbo_PR_Users_DeleteByPK(UserID);
 
-            return RedirectToAction("HomeList");
+            return RedirectToAction("UserList");
 
         }
         #endregion
 
-        #region Home Add
-        public IActionResult HomeAdd(int HomeID)
+        #region User Add
+        public IActionResult UserAdd(int UserID)
         {
             USER_DAL dal = new USER_DAL();
             DataTable statelist = dal.dbo_PR_State_Dropdown();
@@ -61,84 +61,63 @@ namespace The_Ghar.Areas.Admin_Side.Controllers
             List<City_DropDownModel> list2 = new List<City_DropDownModel>();
             ViewBag.CityList = list2;
 
-            if (HomeID != null)
+            if (UserID != null)
             {
 
-                DataTable dt = dalHome.dbo_PR_Home_GetValue_For_Edit(HomeID);
-                HomeModel modelHome = new HomeModel();
+                DataTable dt = dalUSER.dbo_PR_Users_GetValue_For_Edit(UserID);
+                UserModel modelUser = new UserModel();
                 if (dt.Rows.Count > 0)
                 {
 
                     foreach (DataRow dr in dt.Rows)
                     {
 
-                        modelHome.HomeID = Convert.ToInt32(dr["HomeID"]);
-                        modelHome.HomeName = (string)dr["HomeName"];
-                        modelHome.Email = (string)dr["Email"];
-                        modelHome.AreaLocation = (string)dr["AreaLocation"];
-                        modelHome.Mobile = (string)dr["Mobile"];
-                        modelHome.Logo = (string)dr["Logo"];
-                        modelHome.StateID = Convert.ToInt32(dr["StateID"]);
-                        modelHome.CityID = Convert.ToInt32(dr["CityID"]);
-                        modelHome.CostPerPerson = (string)dr["CostPerPerson"];
-                        modelHome.Categories = (string)dr["Categories"];
-                        modelHome.CreationDate = Convert.ToDateTime(dr["CreationDate"]);
-                        modelHome.ModificationDate = Convert.ToDateTime(dr["ModificationDate"]);
-                        modelHome.HomeOwnerID = Convert.ToInt32(dr["HomeOwnerID"]);
-                        modelHome.OwnerName = (string)dr["OwnerName"];
-                        modelHome.OwnerEmail = (string)dr["OwnerEmail"];
-                        modelHome.OwnerMobile = (string)dr["OwnerMobile"];
-                        modelHome.Password = (string)dr["Password"];
+                        modelUser.UserID = Convert.ToInt32(dr["UserID"]);
+                        modelUser.Name = (string)dr["Name"];
+                        modelUser.Email = (string)dr["Email"];
+                        modelUser.Password = (string)dr["Password"];
+                        modelUser.Address = (string)dr["Address"];
+                        modelUser.Mobile = (string)dr["Mobile"];
+                        modelUser.StateID = Convert.ToInt32(dr["StateID"]);
+                        modelUser.CityID = Convert.ToInt32(dr["CityID"]);
+                        modelUser.LastLoginDate = Convert.ToDateTime(dr["LastLoginDate"]);
+                        modelUser.RegistrationDate = Convert.ToDateTime(dr["RegistrationDate"]);
+                        modelUser.CreationDate = Convert.ToDateTime(dr["CreationDate"]);
+                        modelUser.ModificationDate = Convert.ToDateTime(dr["ModificationDate"]);
+
                         DropDownByStateForCity(Convert.ToInt32(dr["StateID"]), list2);
 
                     }
 
-                    return View("HomeAddEdit", modelHome);
+                    return View("UserAddEdit", modelUser);
                 }
             }
-            return View("HomeAddEdit");
+            return View("UserAddEdit");
         }
 
         #endregion
 
         #region Save
 
-        public IActionResult HomeSave(HomeModel modelHome)
+        public IActionResult UserSave(UserModel modelUser)
         {
 
-            if (modelHome.File != null)
+
+
+            if (modelUser.UserID == 0)
             {
-                string FilePath = "wwwroot\\Upload";
-                string path = Path.Combine(Directory.GetCurrentDirectory(), FilePath);
-
-                if (!Directory.Exists(path))
-                    Directory.CreateDirectory(path);
-
-                string fileNameWithPath = Path.Combine(path, modelHome.File.FileName);
-                modelHome.Logo = FilePath.Replace("wwwroot\\", "/") + "/" + modelHome.File.FileName;
-
-                using (var stream = new FileStream(fileNameWithPath, FileMode.Create))
-                {
-                    modelHome.File.CopyTo(stream);
-                }
-
-            }
-
-
-            if (modelHome.HomeID == 0 && modelHome.HomeOwnerID == 0)
-            {
-                DataTable dt = dalHome.dbo_PR_Home_And_HomeOwner_Insert(modelHome);
-                TempData["HomeInsertMsg"] = "Record Inserted Successfully";
+                DataTable dt = dalUSER.dbo_PR_Users_Insert(modelUser);
+                TempData["UserInsertMsg"] = "Record Inserted Successfully";
             }
             else
             {
-                DataTable dt = dalHome.dbo_PR_Home_UpdateByPK(modelHome);
-                TempData["HomeUpdateMsg"] = "Record Updated Successfully";
+                DataTable dt = dalUSER.dbo_PR_Users_UpdateByPK(modelUser);
+                TempData["UserUpdateMsg"] = "Record Updated Successfully";
             }
 
 
 
-            return RedirectToAction("HomeAdd");
+            return RedirectToAction("UserAdd");
 
         }
         #endregion
