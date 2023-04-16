@@ -18,8 +18,23 @@
         <h4>@TempData["HomeUpdateMsg"]</h4>
 
     </div>
-    <form method="post" asp-area="Admin_Side" asp-controller="Home" asp-action="HomeSave">
+    <form method="post" asp-area="Admin_Side" asp-controller="Home" asp-action="HomeSave" enctype="multipart/form-data">
         @Html.HiddenFor(x=>x.HomeID)
+        
+        <div class="form-group row" style="width:100%;">
+            <label class="col-sm-12 col-md-2 col-form-label">Home Name</label>
+            <div class="col-sm-12 col-md-10">
+                <input class="form-control"
+                       type="text" asp-for="HomeName" />
+            </div>
+        </div>
+        <div class="form-group row" style="width:100%;">
+            <label class="col-sm-12 col-md-2 col-form-label">Contact no.</label>
+            <div class="col-sm-12 col-md-10">
+                <input class="form-control"
+                       type="text" asp-for="Mobile" />
+            </div>
+        </div>
         <div class="form-group row" style="width:100%;">
             <label class="col-sm-12 col-md-2 col-form-label">State</label>
             <div class="col-sm-12 col-md-10">
@@ -42,6 +57,12 @@
     appearance: none;" asp-for="StateID" asp-items="@(new SelectList(ViewBag.StateList,"StateID","StateName"))" onchange="fnOnCityChange();" >
                     <option selected="">Select</option>
                 </select>
+            </div>
+        </div>
+
+        <div class="form-group row" style="width:100%;">
+            <label class="col-sm-12 col-md-2 col-form-label">City</label>
+            <div class="col-sm-12 col-md-10">
                 <select class="custom-select col-12" style="font-size: 14px;
     border-radius: 8px;font-family: 'Inter',sans-serif;
     color: #131e22;
@@ -63,20 +84,73 @@
                 </select>
             </div>
         </div>
+        <div class="form-group" style="width:81.5%;">
+            <label class="col-sm-12 col-md-2 col-form-label">Logo</label>
+            <input type="file" class="form-control-file form-control height-auto" asp-for="File">
+        </div>
         <div class="form-group row" style="width:100%;">
-            <label class="col-sm-12 col-md-2 col-form-label">City Name</label>
+            <label class="col-sm-12 col-md-2 col-form-label">Area Location</label>
             <div class="col-sm-12 col-md-10">
                 <input class="form-control"
-                       type="text" asp-for="CityName" />
+                       type="text" asp-for="AreaLocation" />
             </div>
         </div>
-
+        <div class="form-group row" style="width:100%;">
+            <label class="col-sm-12 col-md-2 col-form-label">Email</label>
+            <div class="col-sm-12 col-md-10">
+                <input class="form-control"
+                       type="text" asp-for="Email" />
+            </div>
+        </div>
+        <div class="form-group row" style="width:100%;">
+            <label class="col-sm-12 col-md-2 col-form-label">Cost Per Person</label>
+            <div class="col-sm-12 col-md-10">
+                <input class="form-control"
+                       type="text" asp-for="CostPerPerson" />
+            </div>
+        </div>
+        <div class="form-group row" style="width:100%;">
+            <label class="col-sm-12 col-md-2 col-form-label">Categories</label>
+            <div class="col-sm-12 col-md-10">
+                <input class="form-control"
+                       type="text" asp-for="Categories" />
+            </div>
+        </div>
+        <div class="form-group row" style="width:100%;">
+            <label class="col-sm-12 col-md-2 col-form-label">Owner Name</label>
+            <div class="col-sm-12 col-md-10">
+                <input class="form-control"
+                       type="text" asp-for="OwnerName" />
+            </div>
+        </div>
+        <div class="form-group row" style="width:100%;">
+            <label class="col-sm-12 col-md-2 col-form-label">Owner Email</label>
+            <div class="col-sm-12 col-md-10">
+                <input class="form-control"
+                       type="text" asp-for="OwnerEmail" />
+            </div>
+        </div>
+        <div class="form-group row" style="width:100%;">
+            <label class="col-sm-12 col-md-2 col-form-label">Password</label>
+            <div class="col-sm-12 col-md-10">
+                <input class="form-control"
+                       type="text" asp-for="Password" />
+            </div>
+        </div>
+        <div class="form-group row" style="width:100%;">
+            <label class="col-sm-12 col-md-2 col-form-label">Owner Mobile</label>
+            <div class="col-sm-12 col-md-10">
+                <input class="form-control"
+                       type="text" asp-for="OwnerMobile" />
+            </div>
+        </div>
         <button type="submit" class="btn btn-outline-primary btn-sm mb-0">Save</button>
+        <input type="button" value="Cancel" class="btn btn-outline-primary btn-sm mb-0" onclick="location.href='@Url.Action("HomeList", "Home")'" />
 
 
     </form>
 </div>
-
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
 
     function fnOnCityChange() {
@@ -88,7 +162,7 @@
                 {
                     type: "POST",
                     contentType: "application/json; charset=utf-8",
-                    url: "@Url.Action("DropDownByStateForCity","User_Login")" + "?&StateID=" + StateID,
+                    url: "@Url.Action("DropDownByStateForCity","Home")" + "?&StateID=" + StateID,
                     data: {},
                     dataType: "json",
                     success: function (Result) {

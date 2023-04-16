@@ -274,17 +274,72 @@
             </div>
             </div>
         </nav>
+       <div class="abc">
         @RenderBody()
+        </div>
     </main>
     
 </body>
+@*<script>
+    const navbarLinks = document.querySelectorAll('.navbar-nav .nav-link');
 
+
+    navbarLinks.forEach(link => {
+        link.addEventListener('click', (e) => {
+
+            
+
+
+            navbarLinks.forEach(link => {
+                link.classList.remove('active');
+            });
+
+
+            e.target.classList.add('active');
+        });
+    });
+
+</script>*@
+
+@*<script>
+    const navbarLinks = document.querySelectorAll('.navbar-nav .nav-link');
+    let prevActiveLink = null;
+
+    navbarLinks.forEach(link => {
+        link.addEventListener('click', (e) => {
+            e.preventDefault();
+
+            navbarLinks.forEach(link => {
+                link.classList.remove('active');
+            });
+
+            if (prevActiveLink) {
+                prevActiveLink.classList.remove('active');
+            }
+
+            e.target.classList.add('active');
+            prevActiveLink = e.target;
+
+            const url = e.target.getAttribute('href');
+
+            fetch(url)
+                .then(response => response.text())
+                .then(data => {
+                    const content = document.querySelector('.abc');
+                    content.innerHTML = data;
+                })
+                .catch(error => console.log(error));
+        });
+    });
+</script>
+*@
 
 <script src="~/assets/js/core/popper.min.js"></script>
 <script src="~/assets/js/core/bootstrap.min.js"></script>
 <script src="~/assets/js/plugins/perfect-scrollbar.min.js"></script>
 <script src="~/assets/js/plugins/smooth-scrollbar.min.js"></script>
 <script src="~/assets/js/plugins/chartjs.min.js"></script>
+
 <script>
     var ctx = document.getElementById("chart-bars").getContext("2d");
 

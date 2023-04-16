@@ -150,6 +150,7 @@ if (Array.prototype.some) {
     };
 }
 
+
 function isValid(m) {
     if (m._isValid == null) {
         var flags = getParsingFlags(m);

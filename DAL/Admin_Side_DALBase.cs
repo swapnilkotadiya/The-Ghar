@@ -542,7 +542,7 @@ namespace The_Ghar.DAL
                 sqlDB.AddInParameter(dbCmd, "CityID", SqlDbType.Int, model.CityID);
                 sqlDB.AddInParameter(dbCmd, "CostPerPerson", SqlDbType.NVarChar, model.CostPerPerson);
                 sqlDB.AddInParameter(dbCmd, "Categories", SqlDbType.NVarChar, model.Categories);
-                sqlDB.AddInParameter(dbCmd, "Logo", SqlDbType.NVarChar, model.Logo);
+
                 sqlDB.AddInParameter(dbCmd, "CreationDate", SqlDbType.DateTime, model.CreationDate = null);
                 sqlDB.AddInParameter(dbCmd, "ModificationDate", SqlDbType.DateTime, model.ModificationDate = null);
                 sqlDB.AddInParameter(dbCmd, "OwnerName", SqlDbType.NVarChar, model.OwnerName);
@@ -590,7 +590,7 @@ namespace The_Ghar.DAL
                 sqlDB.AddInParameter(dbCmd, "CityID", SqlDbType.Int, model.CityID);
                 sqlDB.AddInParameter(dbCmd, "CostPerPerson", SqlDbType.NVarChar, model.CostPerPerson);
                 sqlDB.AddInParameter(dbCmd, "Categories", SqlDbType.NVarChar, model.Categories);
-                sqlDB.AddInParameter(dbCmd, "Logo", SqlDbType.NVarChar, model.Logo);
+
 
                 sqlDB.AddInParameter(dbCmd, "ModificationDate", SqlDbType.DateTime, model.ModificationDate = null);
                 sqlDB.AddInParameter(dbCmd, "OwnerName", SqlDbType.NVarChar, model.OwnerName);

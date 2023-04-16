@@ -1,39 +1,38 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using System.Collections.Generic;
+using The_Ghar.DAL;
+using The_Ghar.BALAdmin;
 using System.Data;
 using The_Ghar.Areas.Admin_Side.Models;
 using The_Ghar.Areas.User_Login.Models;
-using The_Ghar.BALAdmin;
-using The_Ghar.DAL;
 
 namespace The_Ghar.Areas.Admin_Side.Controllers
 {
     [CheckAccess]
     [Area("Admin_Side")]
     [Route("Admin_Side/[controller]/[action]")]
-
-    public class HomeController : Controller
+    public class UserController : Controller
     {
-        Admin_Side_DAL dalHome = new Admin_Side_DAL();
+        Admin_Side_DAL dalUSER = new Admin_Side_DAL();
         private IConfiguration Configuration;
-        public HomeController(IConfiguration _configuration)
+        public UserController(IConfiguration _configuration)
         {
             Configuration = _configuration;
         }
-        #region Home Select All
-        public IActionResult HomeList()
+
+        #region User Select All
+        public IActionResult UserList()
         {
-            DataTable dt = dalHome.dbo_PR_Home_SelectAll();
-            return View("HomeList", dt);
+            DataTable dt = dalUSER.dbo_PR_User_SelectAll();
+            return View("UserList", dt);
         }
         #endregion
 
-        #region Home Delete
-        public IActionResult HomeDelete(int HomeID)
+        #region User Delete
+        public IActionResult UserDelete(int HomeID)
         {
 
 
-            DataTable dt = dalHome.dbo_PR_Home_DeleteByPK(HomeID);
+            DataTable dt = dalUSER.dbo_PR_Home_DeleteByPK(HomeID);
 
             return RedirectToAction("HomeList");
 
@@ -169,8 +168,6 @@ namespace The_Ghar.Areas.Admin_Side.Controllers
 
 
         #endregion
-
-
 
     }
 }
