@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Data;
+using System.Drawing;
 using The_Ghar.Areas.Admin_Side.Models;
 using The_Ghar.Areas.User_Login.Models;
 using The_Ghar.BALAdmin;
@@ -109,7 +110,7 @@ namespace The_Ghar.Areas.Admin_Side.Controllers
 
             if (modelHome.File != null)
             {
-                string FilePath = "wwwroot\\Upload";
+                string FilePath = "wwwroot\\Upload\\HomeImages";
                 string path = Path.Combine(Directory.GetCurrentDirectory(), FilePath);
 
                 if (!Directory.Exists(path))
@@ -170,7 +171,18 @@ namespace The_Ghar.Areas.Admin_Side.Controllers
 
         #endregion
 
+        #region Dish List
+        public IActionResult DishList(int HomeID)
+        {
+            if (HomeID != null)
+            {
+                DataTable dt = dalHome.dbo_PR_Dish_SelectAll(HomeID);
+                return View("DishList", dt);
+            }
+            return RedirectToAction("HomeList");
 
+        }
+        #endregion
 
     }
 }

@@ -158,6 +158,13 @@
                                                                 Delete
                                                             </button>
                                                         </form>
+                                                        &nbsp;
+
+                                                        <a class="text-uppercase text-secondary text-xxs font-weight-bolder" asp-controller="Home" asp-action="DishList" asp-route-HomeID="@Convert.ToInt32(dr["HomeID"])">
+                                                                <i class="dw dw-edit2"></i>
+                                                                Edit Dishes
+                                                            </a>
+                                                        
                                                     </div>
                                                 </div>
 

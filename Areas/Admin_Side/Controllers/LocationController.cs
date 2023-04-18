@@ -116,7 +116,7 @@ namespace The_Ghar.Areas.Admin_Side.Controllers
         }
         #endregion
 
-        #region "StateAdd"
+        #region "CityAdd"
         public IActionResult CityAdd(int CityID)
         {
             USER_DAL dal = new USER_DAL();

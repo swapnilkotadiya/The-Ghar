@@ -1,0 +1,149 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    ViewData["Title"] = "Modify User";
+    Layout = "~/Views/Shared/_Layout_Admin_Side.cshtml";
+}
+@using System.Data
+@using The_Ghar.Areas.Admin_Side.Models
+@model UserModel
+
+
+<div class="pd-20 card-box mb-30">
+    <div class="clearfix">
+        <div class="pull-left">
+            <h4 class="h4">Home</h4>
+
+        </div>
+        <h4>@TempData["UserInsertMsg"]</h4>
+        <h4>@TempData["UserUpdateMsg"]</h4>
+
+    </div>
+    <form method="post" asp-area="Admin_Side" asp-controller="User" asp-action="UserSave" enctype="multipart/form-data">
+        @Html.HiddenFor(x=>x.UserID)
+
+        <div class="form-group row" style="width:100%;">
+            <label class="col-sm-12 col-md-2 col-form-label">Name</label>
+            <div class="col-sm-12 col-md-10">
+                <input class="form-control"
+                       type="text" asp-for="Name" />
+            </div>
+        </div>
+        <div class="form-group row" style="width:100%;">
+            <label class="col-sm-12 col-md-2 col-form-label">Email</label>
+            <div class="col-sm-12 col-md-10">
+                <input class="form-control"
+                       type="text" asp-for="Email" />
+            </div>
+        </div>
+        <div class="form-group row" style="width:100%;">
+            <label class="col-sm-12 col-md-2 col-form-label">Password</label>
+            <div class="col-sm-12 col-md-10">
+                <input class="form-control"
+                       type="text" asp-for="Password" />
+            </div>
+        </div>
+        <div class="form-group row" style="width:100%;">
+            <label class="col-sm-12 col-md-2 col-form-label">Address</label>
+            <div class="col-sm-12 col-md-10">
+                <input class="form-control"
+                       type="text" asp-for="Address" />
+            </div>
+        </div>
+        <div class="form-group row" style="width:100%;">
+            <label class="col-sm-12 col-md-2 col-form-label">Mobile</label>
+            <div class="col-sm-12 col-md-10">
+                <input class="form-control"
+                       type="text" asp-for="Mobile" />
+            </div>
+        </div>
+        <div class="form-group row" style="width:100%;">
+            <label class="col-sm-12 col-md-2 col-form-label">State</label>
+            <div class="col-sm-12 col-md-10">
+                <select class="custom-select col-12" style="font-size: 14px;
+    border-radius: 8px;font-family: 'Inter',sans-serif;
+    color: #131e22;
+    font-weight: 400;
+    height: 45px;
+    border-color: #d4d4d4;
+
+    transition: all .3s ease-in-out;display: inline-block;
+    width: 100%;
+
+    padding: 0.375rem 1.75rem 0.375rem 0.75rem;
+    line-height: 1.5;
+    vertical-align: middle;
+
+    border: 1px solid #ced4da;
+
+    appearance: none;" asp-for="StateID" asp-items="@(new SelectList(ViewBag.StateList,"StateID","StateName"))" onchange="fnOnCityChange();">
+                    <option selected="">Select</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group row" style="width:100%;">
+            <label class="col-sm-12 col-md-2 col-form-label">City</label>
+            <div class="col-sm-12 col-md-10">
+                <select class="custom-select col-12" style="font-size: 14px;
+    border-radius: 8px;font-family: 'Inter',sans-serif;
+    color: #131e22;
+    font-weight: 400;
+    height: 45px;
+    border-color: #d4d4d4;
+
+    transition: all .3s ease-in-out;display: inline-block;
+    width: 100%;
+
+    padding: 0.375rem 1.75rem 0.375rem 0.75rem;
+    line-height: 1.5;
+    vertical-align: middle;
+
+    border: 1px solid #ced4da;
+
+    appearance: none;" asp-for="CityID" asp-items="@(new SelectList(ViewBag.CityList,"CityID","CityName"))">
+                    <option selected="">Select</option>
+                </select>
+            </div>
+        </div>
+        
+        <button type="submit" class="btn btn-outline-primary btn-sm mb-0">Save</button>
+        <input type="button" value="Cancel" class="btn btn-outline-primary btn-sm mb-0" onclick="location.href='@Url.Action("UserList", "User")'" />
+
+
+    </form>
+</div>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+
+    function fnOnCityChange() {
+        var StateID = $("#StateID").val();
+        if (StateID !== "") {
+            $("#CityID").empty();
+            $("#CityID").append($("<option></option").val("").html("Select City"));
+            $.ajax(
+                {
+                    type: "POST",
+                    contentType: "application/json; charset=utf-8",
+                    url: "@Url.Action("DropDownByStateForCity","Home")" + "?&StateID=" + StateID,
+                    data: {},
+                    dataType: "json",
+                    success: function (Result) {
+                        $.each(Result,
+                            function (key, value) {
+                                $("#CityID").append($("<option></option>").val(value.cityID).html(value.cityName));
+                            });
+                    },
+                    error: function (r) {
+                        alert("Error while loading combobox.");
+                    }
+
+                });
+
+        } else {
+            $("#CityID").empty();
+            $("#CityID").append($("<option></option>").val("").html("Select City"));
+        }
+    }
+</script>

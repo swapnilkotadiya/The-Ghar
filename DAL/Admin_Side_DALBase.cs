@@ -769,5 +769,172 @@ namespace The_Ghar.DAL
             }
         }
         #endregion
+
+        #region Dish Select All
+        public DataTable dbo_PR_Dish_SelectAll(int HomeID)
+        {
+            try
+            {
+                SqlDatabase sqlDB = new SqlDatabase(myConnectionString);
+                DbCommand dbCmd = sqlDB.GetStoredProcCommand("dbo.PR_Dish_SelectAll_By_HomeID");
+                sqlDB.AddInParameter(dbCmd, "HomeID", SqlDbType.Int, HomeID);
+                DataTable dt = new DataTable();
+                using (IDataReader dr = sqlDB.ExecuteReader(dbCmd))
+                {
+                    dt.Load(dr);
+                }
+                return dt;
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
+
+        #endregion
+
+        //#region Dish Delete
+        //public DataTable dbo_PR_Home_DeleteByPK(int HomeID)
+        //{
+        //    try
+        //    {
+        //        SqlDatabase sqlDB = new SqlDatabase(myConnectionString);
+        //        DbCommand dbCMD = sqlDB.GetStoredProcCommand("dbo.PR_Home_DeleteByPK");
+        //        sqlDB.AddInParameter(dbCMD, "HomeID", SqlDbType.Int, HomeID);
+
+        //        DataTable dt = new DataTable();
+        //        using (IDataReader dr = sqlDB.ExecuteReader(dbCMD))
+        //        {
+        //            dt.Load(dr);
+        //        }
+        //        return dt;
+        //    }
+        //    catch (Exception e)
+        //    {
+
+        //        return null;
+
+        //    }
+        //}
+        //#endregion
+
+        //#region Dish Edit
+
+        //public DataTable dbo_PR_Home_GetValue_For_Edit(int HomeID)
+        //{
+        //    try
+        //    {
+        //        SqlDatabase sqlDB = new SqlDatabase(myConnectionString);
+        //        DbCommand dbCmd = sqlDB.GetStoredProcCommand("dbo.PR_Home_GetValue_For_Edit");
+        //        sqlDB.AddInParameter(dbCmd, "HomeID", SqlDbType.Int, HomeID);
+        //        DataTable dt = new DataTable();
+        //        using (IDataReader dr = sqlDB.ExecuteReader(dbCmd))
+        //        {
+        //            dt.Load(dr);
+
+        //        }
+
+        //        return dt;
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return null;
+        //    }
+        //}
+
+        //#endregion
+
+        //#region Dish Insert
+        //public DataTable dbo_PR_Home_And_HomeOwner_Insert(HomeModel model)
+        //{
+        //    try
+        //    {
+        //        SqlDatabase sqlDB = new SqlDatabase(myConnectionString);
+        //        DbCommand dbCmd = sqlDB.GetStoredProcCommand("dbo.PR_Home_And_HomeOwner_Insert");
+
+        //        sqlDB.AddInParameter(dbCmd, "HomeName", SqlDbType.NVarChar, model.HomeName);
+        //        sqlDB.AddInParameter(dbCmd, "Email", SqlDbType.NVarChar, model.Email);
+        //        sqlDB.AddInParameter(dbCmd, "AreaLocation", SqlDbType.NVarChar, model.AreaLocation);
+        //        sqlDB.AddInParameter(dbCmd, "Mobile", SqlDbType.NVarChar, model.Mobile);
+        //        sqlDB.AddInParameter(dbCmd, "Logo", SqlDbType.NVarChar, model.Logo);
+        //        sqlDB.AddInParameter(dbCmd, "StateID", SqlDbType.Int, model.StateID);
+        //        sqlDB.AddInParameter(dbCmd, "CityID", SqlDbType.Int, model.CityID);
+        //        sqlDB.AddInParameter(dbCmd, "CostPerPerson", SqlDbType.NVarChar, model.CostPerPerson);
+        //        sqlDB.AddInParameter(dbCmd, "Categories", SqlDbType.NVarChar, model.Categories);
+
+        //        sqlDB.AddInParameter(dbCmd, "CreationDate", SqlDbType.DateTime, model.CreationDate = null);
+        //        sqlDB.AddInParameter(dbCmd, "ModificationDate", SqlDbType.DateTime, model.ModificationDate = null);
+        //        sqlDB.AddInParameter(dbCmd, "OwnerName", SqlDbType.NVarChar, model.OwnerName);
+        //        sqlDB.AddInParameter(dbCmd, "OwnerEmail", SqlDbType.NVarChar, model.OwnerEmail);
+        //        sqlDB.AddInParameter(dbCmd, "OwnerMobile", SqlDbType.NVarChar, model.OwnerMobile);
+        //        sqlDB.AddInParameter(dbCmd, "Password", SqlDbType.NVarChar, model.Password);
+
+
+        //        DataTable dt = new DataTable();
+
+        //        using (IDataReader dr = sqlDB.ExecuteReader(dbCmd))
+        //        {
+        //            dt.Load(dr);
+
+
+
+        //        }
+        //        return dt;
+        //    }
+        //    catch (Exception e)
+        //    {
+
+        //        return null;
+
+        //    }
+        //}
+        //#endregion
+
+        //#region Dish Update
+        //public DataTable dbo_PR_Home_UpdateByPK(HomeModel model)
+        //{
+        //    try
+        //    {
+        //        SqlDatabase sqlDB = new SqlDatabase(myConnectionString);
+        //        DbCommand dbCmd = sqlDB.GetStoredProcCommand("dbo.PR_Home_UpdateByPK");
+
+        //        sqlDB.AddInParameter(dbCmd, "HomeID", SqlDbType.Int, model.HomeID);
+        //        sqlDB.AddInParameter(dbCmd, "HomeOwnerID", SqlDbType.Int, model.HomeOwnerID);
+        //        sqlDB.AddInParameter(dbCmd, "HomeName", SqlDbType.NVarChar, model.HomeName);
+        //        sqlDB.AddInParameter(dbCmd, "Email", SqlDbType.NVarChar, model.Email);
+        //        sqlDB.AddInParameter(dbCmd, "AreaLocation", SqlDbType.NVarChar, model.AreaLocation);
+        //        sqlDB.AddInParameter(dbCmd, "Mobile", SqlDbType.NVarChar, model.Mobile);
+        //        sqlDB.AddInParameter(dbCmd, "Logo", SqlDbType.NVarChar, model.Logo);
+        //        sqlDB.AddInParameter(dbCmd, "StateID", SqlDbType.Int, model.StateID);
+        //        sqlDB.AddInParameter(dbCmd, "CityID", SqlDbType.Int, model.CityID);
+        //        sqlDB.AddInParameter(dbCmd, "CostPerPerson", SqlDbType.NVarChar, model.CostPerPerson);
+        //        sqlDB.AddInParameter(dbCmd, "Categories", SqlDbType.NVarChar, model.Categories);
+
+
+        //        sqlDB.AddInParameter(dbCmd, "ModificationDate", SqlDbType.DateTime, model.ModificationDate = null);
+        //        sqlDB.AddInParameter(dbCmd, "OwnerName", SqlDbType.NVarChar, model.OwnerName);
+        //        sqlDB.AddInParameter(dbCmd, "OwnerEmail", SqlDbType.NVarChar, model.OwnerEmail);
+        //        sqlDB.AddInParameter(dbCmd, "OwnerMobile", SqlDbType.NVarChar, model.OwnerMobile);
+        //        sqlDB.AddInParameter(dbCmd, "Password", SqlDbType.NVarChar, model.Password);
+
+
+
+        //        DataTable dt = new DataTable();
+
+        //        using (IDataReader dr = sqlDB.ExecuteReader(dbCmd))
+        //        {
+        //            dt.Load(dr);
+
+        //        }
+        //        return dt;
+        //    }
+        //    catch (Exception e)
+        //    {
+
+        //        return null;
+
+        //    }
+        //}
+        //#endregion
     }
 }

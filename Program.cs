@@ -29,8 +29,8 @@ app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
 
-app.MapControllerRoute(
-    name: "Admin",
-    pattern: "{areas:exists}/{controller=Home}/{action=Index}/{id?}/admin-login");
+//app.MapControllerRoute(
+//    name: "Admin",
+//    pattern: "{areas:exists}/{controller=Dashboard}/{action=Dashboard}/{id?}/admin-login");
 
 app.Run();

@@ -2,12 +2,10 @@
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
 @{
-    ViewData["Title"] = "User List";
+    ViewData["Title"] = "Dishes";
     Layout = "~/Views/Shared/_Layout_Admin_Side.cshtml";
 }
-
 @using System.Data
-
 @model DataTable
 <link href="~/datatables/css/datatables.bootstrap4.min.css" rel="stylesheet" />
 <link href="~/datatables/css/jquery.datatables.min.css" rel="stylesheet" />
@@ -25,10 +23,10 @@
                 <div class="card-header pb-0">
                     <div class="row align-items-center">
                         <div class="col">
-                            <h6>Users</h6>
+                            <h6>Dishes</h6>
                         </div>
                         <div class="col-auto" style="margin-bottom:15px;">
-                            <a asp-area="Admin_Side" asp-controller="User" asp-action="UserAdd" class="btn btn-outline-primary btn-sm mb-0">Add User</a>
+                            <a asp-area="Admin_Side" asp-controller="Dish" asp-action="DishAdd" class="btn btn-outline-primary btn-sm mb-0">Dish State</a>
                         </div>
                     </div>
                 </div>
@@ -38,30 +36,42 @@
                         <table class="table align-items-center mb-0   data-table-export ">
                             <thead>
                                 <tr>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7" style="padding-left:20px;">Name</th>
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Home Name</th>
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        Email
+                                        Dish Photo
                                     </th>
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        Password
+                                        Dish Name
                                     </th>
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        Address
+                                        Description
                                     </th>
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        Mobile
+                                        Price
                                     </th>
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        State
+                                        Category
                                     </th>
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        City
+                                        Preparation Time
                                     </th>
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        Registration Date
+                                        Cooking Time
                                     </th>
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        Last Login Date
+                                        Total Time
+                                    </th>
+                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                        Course
+                                    </th>
+                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                        Cuisine
+                                    </th>
+                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                        Ingredients
+                                    </th>
+                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                        VideoURl
                                     </th>
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                         Creation Date
@@ -76,38 +86,44 @@
                             @foreach (DataRow dr in Model.Rows)
                             {
                                     <tr>
-
-                                        <td>
-                                            <div class="d-flex px-2 py-1">
-
-                                                <div class="d-flex flex-column justify-content-center">
-                                                    <p class="text-xs font-weight-bold mb-0">@dr["Name"]</p>
-                                                </div>
-                                            </div>
+                                        <td class="align-middle text-center text-sm">
+                                            <p class="text-xs font-weight-bold mb-0">@dr["HomeName"]</p>
                                         </td>
                                         <td class="align-middle text-center text-sm">
-                                            <p class="text-xs font-weight-bold mb-0">@dr["Email"]</p>
+                                            <p class="text-xs font-weight-bold mb-0">@dr["DishPhoto"]</p>
                                         </td>
                                         <td class="align-middle text-center text-sm">
-                                            <p class="text-xs font-weight-bold mb-0">@dr["Password"]</p>
+                                            <p class="text-xs font-weight-bold mb-0">@dr["DishName"]</p>
                                         </td>
                                         <td class="align-middle text-center text-sm">
-                                            <p class="text-xs font-weight-bold mb-0">@dr["Address"]</p>
+                                            <p class="text-xs font-weight-bold mb-0">@dr["Description"]</p>
                                         </td>
                                         <td class="align-middle text-center text-sm">
-                                            <p class="text-xs font-weight-bold mb-0">@dr["Mobile"]</p>
+                                            <p class="text-xs font-weight-bold mb-0">@dr["Price"]</p>
                                         </td>
                                         <td class="align-middle text-center text-sm">
-                                            <p class="text-xs font-weight-bold mb-0">@dr["StateName"]</p>
+                                            <p class="text-xs font-weight-bold mb-0">@dr["Category"]</p>
                                         </td>
                                         <td class="align-middle text-center text-sm">
-                                            <p class="text-xs font-weight-bold mb-0">@dr["CityName"]</p>
+                                            <p class="text-xs font-weight-bold mb-0">@dr["PrepTime"]</p>
                                         </td>
                                         <td class="align-middle text-center text-sm">
-                                            <p class="text-xs font-weight-bold mb-0">@dr["RegistrationDate"]</p>
+                                            <p class="text-xs font-weight-bold mb-0">@dr["CookTime"]</p>
                                         </td>
                                         <td class="align-middle text-center text-sm">
-                                            <p class="text-xs font-weight-bold mb-0">@dr["LastLoginDate"]</p>
+                                            <p class="text-xs font-weight-bold mb-0">@dr["TotalTime"]</p>
+                                        </td>
+                                        <td class="align-middle text-center text-sm">
+                                            <p class="text-xs font-weight-bold mb-0">@dr["Course"]</p>
+                                        </td>
+                                        <td class="align-middle text-center text-sm">
+                                            <p class="text-xs font-weight-bold mb-0">@dr["Cuisine"]</p>
+                                        </td>
+                                        <td class="align-middle text-center text-sm">
+                                            <p class="text-xs font-weight-bold mb-0">@dr["Ingredients"]</p>
+                                        </td>
+                                        <td class="align-middle text-center text-sm">
+                                            <p class="text-xs font-weight-bold mb-0">@dr["VideoURl"]</p>
                                         </td>
                                         <td class="align-middle text-center text-sm">
                                             <p class="text-xs font-weight-bold mb-0">@dr["CreationDate"]</p>
@@ -119,15 +135,15 @@
                                             <div style="position: relative;">
                                                 <div class="btn btn-link font-24 p-0 line-height-1 no-arrow text-center align-middle">
                                                     <div class="align-middle text-center">
-                                                        <form asp-area="Admin_Side" asp-controller="User" asp-action="UserDelete">
-                                                            <a class="text-uppercase text-secondary text-xxs font-weight-bolder" asp-area="Admin_Side" asp-controller="User" asp-action="UserAdd" asp-route-UserID="@Convert.ToInt32(dr["UserID"])">
+                                                        <form asp-area="Admin_Side" asp-controller="Dish" asp-action="DishDelete">
+                                                            <a class="text-uppercase text-secondary text-xxs font-weight-bolder" asp-area="Admin_Side" asp-controller="Dish" asp-action="DishAdd" asp-route-stateid="@Convert.ToInt32(dr["DishID"])">
                                                                 <i class="dw dw-edit2"></i>
                                                                 Edit
                                                             </a>
                                                             &nbsp;
 
 
-                                                            <input type="hidden" name="UserID" value="@Convert.ToInt32(dr["UserID"])" />
+                                                            <input type="hidden" name="DishID" value="@Convert.ToInt32(dr["DishID"])" />
                                                             <button type="submit" class=" text-uppercase text-secondary text-xxs font-weight-bolder" style="border:none;background-color: #fff;" onclick="fun1(event)">
 
                                                                 <i class="dw dw-delete-3"></i>
@@ -135,6 +151,7 @@
                                                                 Delete
                                                             </button>
                                                         </form>
+
                                                     </div>
                                                 </div>
 
