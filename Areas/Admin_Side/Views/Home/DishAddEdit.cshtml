@@ -1,4 +1,111 @@
-﻿@{
-    ViewData["Title"] = "Admin";
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    ViewData["Title"] = "Modify Home";
     Layout = "~/Views/Shared/_Layout_Admin_Side.cshtml";
 }
+@using System.Data
+@using The_Ghar.Areas.Admin_Side.Models
+@model DishModel
+<div class="pd-20 card-box mb-30">
+    <div class="clearfix">
+        <div class="pull-left">
+            <h4 class="h4">Home</h4>
+
+        </div>
+        <h4>@TempData["DishInsertMsg"]</h4>
+        <h4>@TempData["DishUpdateMsg"]</h4>
+
+    </div>
+    <form method="post" asp-area="Admin_Side" asp-controller="Home" asp-action="DishSave" enctype="multipart/form-data">
+        @Html.HiddenFor(x=>x.HomeID)
+        @Html.HiddenFor(x=>x.DishID)
+
+        <div class="form-group row" style="width:100%;">
+            <label class="col-sm-12 col-md-2 col-form-label">Dish Name</label>
+            <div class="col-sm-12 col-md-10">
+                <input class="form-control"
+                       type="text" asp-for="DishName" />
+            </div>
+        </div>
+        <div class="form-group row" style="width:100%;">
+            <label class="col-sm-12 col-md-2 col-form-label">Description</label>
+            <div class="col-sm-12 col-md-10">
+                <input class="form-control"
+                       type="text" asp-for="Description" />
+            </div>
+        </div>
+        @*<div class="form-group" style="width:81.5%;">
+            <label class="col-sm-12 col-md-2 col-form-label">Logo</label>
+            <input type="file" class="form-control-file form-control height-auto" asp-for="File">
+        </div>*@
+        <div class="form-group row" style="width:100%;">
+            <label class="col-sm-12 col-md-2 col-form-label">Dish Photo</label>
+            <div class="col-sm-12 col-md-10">
+                <input class="form-control"
+                       type="text" asp-for="DishPhoto" />
+            </div>
+        </div>
+        <div class="form-group row" style="width:100%;">
+            <label class="col-sm-12 col-md-2 col-form-label">Price</label>
+            <div class="col-sm-12 col-md-10">
+                <input class="form-control"
+                       type="text" asp-for="Price" />
+            </div>
+        </div>
+        <div class="form-group row" style="width:100%;">
+            <label class="col-sm-12 col-md-2 col-form-label">Category</label>
+            <div class="col-sm-12 col-md-10">
+                <input class="form-control"
+                       type="text" asp-for="Category" />
+            </div>
+        </div>
+        <div class="form-group row" style="width:100%;">
+            <label class="col-sm-12 col-md-2 col-form-label">Preparation Time</label>
+            <div class="col-sm-12 col-md-10">
+                <input class="form-control"
+                       type="text" asp-for="PrepTime" />
+            </div>
+        </div>
+        <div class="form-group row" style="width:100%;">
+            <label class="col-sm-12 col-md-2 col-form-label">Cook Time</label>
+            <div class="col-sm-12 col-md-10">
+                <input class="form-control"
+                       type="text" asp-for="CookTime" />
+            </div>
+        </div>
+        <div class="form-group row" style="width:100%;">
+            <label class="col-sm-12 col-md-2 col-form-label">Total Time</label>
+            <div class="col-sm-12 col-md-10">
+                <input class="form-control"
+                       type="text" asp-for="TotalTime" />
+            </div>
+        </div>
+        <div class="form-group row" style="width:100%;">
+            <label class="col-sm-12 col-md-2 col-form-label">Course</label>
+            <div class="col-sm-12 col-md-10">
+                <input class="form-control"
+                       type="text" asp-for="Course" />
+            </div>
+        </div>
+        <div class="form-group row" style="width:100%;">
+            <label class="col-sm-12 col-md-2 col-form-label">Ingredients</label>
+            <div class="col-sm-12 col-md-10">
+                <input class="form-control"
+                       type="text" asp-for="Ingredients" />
+            </div>
+        </div>
+        <div class="form-group row" style="width:100%;">
+            <label class="col-sm-12 col-md-2 col-form-label">Video URl</label>
+            <div class="col-sm-12 col-md-10">
+                <input class="form-control"
+                       type="text" asp-for="VideoURl" />
+            </div>
+        </div>
+        <button type="submit" class="btn btn-outline-primary btn-sm mb-0">Save</button>
+        <input type="button" value="Cancel" class="btn btn-outline-primary btn-sm mb-0" onclick="location.href='@Url.Action("DishList", "Home")'" />
+
+
+    </form>
+</div>

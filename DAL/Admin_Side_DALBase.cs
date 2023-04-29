@@ -191,7 +191,6 @@ namespace The_Ghar.DAL
         }
         #endregion
 
-
         #region City Delete
         public DataTable dbo_PR_City_DeleteByPK(int CityID)
         {
@@ -793,148 +792,135 @@ namespace The_Ghar.DAL
 
         #endregion
 
-        //#region Dish Delete
-        //public DataTable dbo_PR_Home_DeleteByPK(int HomeID)
-        //{
-        //    try
-        //    {
-        //        SqlDatabase sqlDB = new SqlDatabase(myConnectionString);
-        //        DbCommand dbCMD = sqlDB.GetStoredProcCommand("dbo.PR_Home_DeleteByPK");
-        //        sqlDB.AddInParameter(dbCMD, "HomeID", SqlDbType.Int, HomeID);
+        #region Dish Delete
+        public DataTable dbo_PR_Dish_DeleteByPK(int DishID)
+        {
+            try
+            {
+                SqlDatabase sqlDB = new SqlDatabase(myConnectionString);
+                DbCommand dbCMD = sqlDB.GetStoredProcCommand("dbo.PR_Dish_DeleteByPK");
+                sqlDB.AddInParameter(dbCMD, "DishID", SqlDbType.Int, DishID);
 
-        //        DataTable dt = new DataTable();
-        //        using (IDataReader dr = sqlDB.ExecuteReader(dbCMD))
-        //        {
-        //            dt.Load(dr);
-        //        }
-        //        return dt;
-        //    }
-        //    catch (Exception e)
-        //    {
+                DataTable dt = new DataTable();
+                using (IDataReader dr = sqlDB.ExecuteReader(dbCMD))
+                {
+                    dt.Load(dr);
+                }
+                return dt;
+            }
+            catch (Exception e)
+            {
 
-        //        return null;
+                return null;
 
-        //    }
-        //}
-        //#endregion
+            }
+        }
+        #endregion
 
-        //#region Dish Edit
+        #region Dish Edit
 
-        //public DataTable dbo_PR_Home_GetValue_For_Edit(int HomeID)
-        //{
-        //    try
-        //    {
-        //        SqlDatabase sqlDB = new SqlDatabase(myConnectionString);
-        //        DbCommand dbCmd = sqlDB.GetStoredProcCommand("dbo.PR_Home_GetValue_For_Edit");
-        //        sqlDB.AddInParameter(dbCmd, "HomeID", SqlDbType.Int, HomeID);
-        //        DataTable dt = new DataTable();
-        //        using (IDataReader dr = sqlDB.ExecuteReader(dbCmd))
-        //        {
-        //            dt.Load(dr);
+        public DataTable dbo_PR_Dish_GetValue_For_Edit(int DishID)
+        {
+            try
+            {
+                SqlDatabase sqlDB = new SqlDatabase(myConnectionString);
+                DbCommand dbCmd = sqlDB.GetStoredProcCommand("dbo.PR_Dish_GetValue_For_Edit");
+                sqlDB.AddInParameter(dbCmd, "DishID", SqlDbType.Int, DishID);
+                DataTable dt = new DataTable();
+                using (IDataReader dr = sqlDB.ExecuteReader(dbCmd))
+                {
+                    dt.Load(dr);
 
-        //        }
+                }
 
-        //        return dt;
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        return null;
-        //    }
-        //}
+                return dt;
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
 
-        //#endregion
+        #endregion
 
-        //#region Dish Insert
-        //public DataTable dbo_PR_Home_And_HomeOwner_Insert(HomeModel model)
-        //{
-        //    try
-        //    {
-        //        SqlDatabase sqlDB = new SqlDatabase(myConnectionString);
-        //        DbCommand dbCmd = sqlDB.GetStoredProcCommand("dbo.PR_Home_And_HomeOwner_Insert");
+        #region Dish Insert
+        public DataTable dbo_PR_Dish_And_Recipe_Insert(int HomeID, DishModel model)
+        {
+            try
+            {
+                SqlDatabase sqlDB = new SqlDatabase(myConnectionString);
+                DbCommand dbCmd = sqlDB.GetStoredProcCommand("dbo.PR_Home_And_HomeOwner_Insert");
+                sqlDB.AddInParameter(dbCmd, "HomeID", SqlDbType.Int, model.HomeID = HomeID);
+                sqlDB.AddInParameter(dbCmd, "DishName", SqlDbType.NVarChar, model.DishName);
+                sqlDB.AddInParameter(dbCmd, "Description", SqlDbType.NVarChar, model.Description);
+                sqlDB.AddInParameter(dbCmd, "Price", SqlDbType.NVarChar, model.Price);
+                sqlDB.AddInParameter(dbCmd, "Category", SqlDbType.NVarChar, model.Category);
+                sqlDB.AddInParameter(dbCmd, "DishPhoto", SqlDbType.NVarChar, model.DishPhoto);
+                sqlDB.AddInParameter(dbCmd, "CreationDate", SqlDbType.DateTime, model.CreationDate = null);
+                sqlDB.AddInParameter(dbCmd, "ModificationDate", SqlDbType.DateTime, model.ModificationDate = null);
+                sqlDB.AddInParameter(dbCmd, "PrepTime", SqlDbType.NVarChar, model.PrepTime);
+                sqlDB.AddInParameter(dbCmd, "CookTime", SqlDbType.NVarChar, model.CookTime);
+                sqlDB.AddInParameter(dbCmd, "TotalTime", SqlDbType.NVarChar, model.TotalTime);
+                sqlDB.AddInParameter(dbCmd, "Course", SqlDbType.NVarChar, model.Course);
+                sqlDB.AddInParameter(dbCmd, "Cuisine", SqlDbType.NVarChar, model.Cuisine);
+                sqlDB.AddInParameter(dbCmd, "Ingredients", SqlDbType.NVarChar, model.Ingredients);
+                sqlDB.AddInParameter(dbCmd, "VideoURL", SqlDbType.NVarChar, model.VideoURl);
 
-        //        sqlDB.AddInParameter(dbCmd, "HomeName", SqlDbType.NVarChar, model.HomeName);
-        //        sqlDB.AddInParameter(dbCmd, "Email", SqlDbType.NVarChar, model.Email);
-        //        sqlDB.AddInParameter(dbCmd, "AreaLocation", SqlDbType.NVarChar, model.AreaLocation);
-        //        sqlDB.AddInParameter(dbCmd, "Mobile", SqlDbType.NVarChar, model.Mobile);
-        //        sqlDB.AddInParameter(dbCmd, "Logo", SqlDbType.NVarChar, model.Logo);
-        //        sqlDB.AddInParameter(dbCmd, "StateID", SqlDbType.Int, model.StateID);
-        //        sqlDB.AddInParameter(dbCmd, "CityID", SqlDbType.Int, model.CityID);
-        //        sqlDB.AddInParameter(dbCmd, "CostPerPerson", SqlDbType.NVarChar, model.CostPerPerson);
-        //        sqlDB.AddInParameter(dbCmd, "Categories", SqlDbType.NVarChar, model.Categories);
+                DataTable dt = new DataTable();
 
-        //        sqlDB.AddInParameter(dbCmd, "CreationDate", SqlDbType.DateTime, model.CreationDate = null);
-        //        sqlDB.AddInParameter(dbCmd, "ModificationDate", SqlDbType.DateTime, model.ModificationDate = null);
-        //        sqlDB.AddInParameter(dbCmd, "OwnerName", SqlDbType.NVarChar, model.OwnerName);
-        //        sqlDB.AddInParameter(dbCmd, "OwnerEmail", SqlDbType.NVarChar, model.OwnerEmail);
-        //        sqlDB.AddInParameter(dbCmd, "OwnerMobile", SqlDbType.NVarChar, model.OwnerMobile);
-        //        sqlDB.AddInParameter(dbCmd, "Password", SqlDbType.NVarChar, model.Password);
+                using (IDataReader dr = sqlDB.ExecuteReader(dbCmd))
+                {
+                    dt.Load(dr);
+                }
+                return dt;
+            }
+            catch (Exception e)
+            {
+                return null;
+            }
+        }
+        #endregion
 
+        #region Dish Update
+        public DataTable dbo_PR_Dish_UpdateByPK(int HomeID, DishModel model)
+        {
+            try
+            {
+                SqlDatabase sqlDB = new SqlDatabase(myConnectionString);
+                DbCommand dbCmd = sqlDB.GetStoredProcCommand("dbo.PR_Dish_UpdateByPK");
 
-        //        DataTable dt = new DataTable();
+                sqlDB.AddInParameter(dbCmd, "DishID", SqlDbType.Int, model.DishID);
+                sqlDB.AddInParameter(dbCmd, "HomeID", SqlDbType.Int, model.HomeID = HomeID);
+                sqlDB.AddInParameter(dbCmd, "DishName", SqlDbType.NVarChar, model.DishName);
+                sqlDB.AddInParameter(dbCmd, "Description", SqlDbType.NVarChar, model.Description);
+                sqlDB.AddInParameter(dbCmd, "Price", SqlDbType.Decimal, model.Price);
+                sqlDB.AddInParameter(dbCmd, "Category", SqlDbType.NVarChar, model.Category);
+                sqlDB.AddInParameter(dbCmd, "DishPhoto", SqlDbType.NVarChar, model.DishPhoto);
+                sqlDB.AddInParameter(dbCmd, "ModificationDate", SqlDbType.DateTime, model.ModificationDate = null);
+                sqlDB.AddInParameter(dbCmd, "PrepTime", SqlDbType.NVarChar, model.PrepTime);
+                sqlDB.AddInParameter(dbCmd, "CookTime", SqlDbType.NVarChar, model.CookTime);
+                sqlDB.AddInParameter(dbCmd, "TotalTime", SqlDbType.NVarChar, model.TotalTime);
+                sqlDB.AddInParameter(dbCmd, "Course", SqlDbType.NVarChar, model.Course);
+                sqlDB.AddInParameter(dbCmd, "Cuisine", SqlDbType.NVarChar, model.Cuisine);
+                sqlDB.AddInParameter(dbCmd, "Ingredients", SqlDbType.NVarChar, model.Ingredients);
+                sqlDB.AddInParameter(dbCmd, "VideoURL", SqlDbType.NVarChar, model.VideoURl);
 
-        //        using (IDataReader dr = sqlDB.ExecuteReader(dbCmd))
-        //        {
-        //            dt.Load(dr);
+                DataTable dt = new DataTable();
 
+                using (IDataReader dr = sqlDB.ExecuteReader(dbCmd))
+                {
+                    dt.Load(dr);
 
+                }
+                return dt;
+            }
+            catch (Exception e)
+            {
 
-        //        }
-        //        return dt;
-        //    }
-        //    catch (Exception e)
-        //    {
+                return null;
 
-        //        return null;
-
-        //    }
-        //}
-        //#endregion
-
-        //#region Dish Update
-        //public DataTable dbo_PR_Home_UpdateByPK(HomeModel model)
-        //{
-        //    try
-        //    {
-        //        SqlDatabase sqlDB = new SqlDatabase(myConnectionString);
-        //        DbCommand dbCmd = sqlDB.GetStoredProcCommand("dbo.PR_Home_UpdateByPK");
-
-        //        sqlDB.AddInParameter(dbCmd, "HomeID", SqlDbType.Int, model.HomeID);
-        //        sqlDB.AddInParameter(dbCmd, "HomeOwnerID", SqlDbType.Int, model.HomeOwnerID);
-        //        sqlDB.AddInParameter(dbCmd, "HomeName", SqlDbType.NVarChar, model.HomeName);
-        //        sqlDB.AddInParameter(dbCmd, "Email", SqlDbType.NVarChar, model.Email);
-        //        sqlDB.AddInParameter(dbCmd, "AreaLocation", SqlDbType.NVarChar, model.AreaLocation);
-        //        sqlDB.AddInParameter(dbCmd, "Mobile", SqlDbType.NVarChar, model.Mobile);
-        //        sqlDB.AddInParameter(dbCmd, "Logo", SqlDbType.NVarChar, model.Logo);
-        //        sqlDB.AddInParameter(dbCmd, "StateID", SqlDbType.Int, model.StateID);
-        //        sqlDB.AddInParameter(dbCmd, "CityID", SqlDbType.Int, model.CityID);
-        //        sqlDB.AddInParameter(dbCmd, "CostPerPerson", SqlDbType.NVarChar, model.CostPerPerson);
-        //        sqlDB.AddInParameter(dbCmd, "Categories", SqlDbType.NVarChar, model.Categories);
-
-
-        //        sqlDB.AddInParameter(dbCmd, "ModificationDate", SqlDbType.DateTime, model.ModificationDate = null);
-        //        sqlDB.AddInParameter(dbCmd, "OwnerName", SqlDbType.NVarChar, model.OwnerName);
-        //        sqlDB.AddInParameter(dbCmd, "OwnerEmail", SqlDbType.NVarChar, model.OwnerEmail);
-        //        sqlDB.AddInParameter(dbCmd, "OwnerMobile", SqlDbType.NVarChar, model.OwnerMobile);
-        //        sqlDB.AddInParameter(dbCmd, "Password", SqlDbType.NVarChar, model.Password);
-
-
-
-        //        DataTable dt = new DataTable();
-
-        //        using (IDataReader dr = sqlDB.ExecuteReader(dbCmd))
-        //        {
-        //            dt.Load(dr);
-
-        //        }
-        //        return dt;
-        //    }
-        //    catch (Exception e)
-        //    {
-
-        //        return null;
-
-        //    }
-        //}
-        //#endregion
+            }
+        }
+        #endregion
     }
 }

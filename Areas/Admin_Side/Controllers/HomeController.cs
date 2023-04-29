@@ -184,5 +184,99 @@ namespace The_Ghar.Areas.Admin_Side.Controllers
         }
         #endregion
 
+        #region Dish
+
+        public IActionResult DishDelete(int HomeID, int DishID)
+        {
+
+            DataTable dt = dalHome.dbo_PR_Dish_DeleteByPK(DishID);
+            return RedirectToAction("DishList");
+        }
+        #endregion
+
+
+        #region Dish Add
+        public IActionResult DishAdd(int DishID)
+        {
+            USER_DAL dal = new USER_DAL();
+
+            if (DishID != null)
+            {
+
+                DataTable dt = dalHome.dbo_PR_Dish_GetValue_For_Edit(DishID);
+                DishModel modelHome = new DishModel();
+                if (dt.Rows.Count > 0)
+                {
+
+                    foreach (DataRow dr in dt.Rows)
+                    {
+
+                        modelHome.DishID = Convert.ToInt32(dr["DishID"]);
+                        modelHome.HomeID = Convert.ToInt32(dr["HomeID"]);
+                        modelHome.HomeName = (string)dr["HomeName"];
+                        modelHome.Description = (string)dr["Description"];
+                        modelHome.Price = Convert.ToInt32(dr["Price"]);
+                        modelHome.Category = (string)dr["Category"];
+                        modelHome.DishPhoto = (string)dr["DishPhoto"];
+                        modelHome.RecipeID = Convert.ToInt32(dr["RecipeID"]);
+                        modelHome.PrepTime = (string)(dr["PrepTime"]);
+                        modelHome.CookTime = (string)dr["CookTime"];
+                        modelHome.TotalTime = (string)dr["TotalTime"];
+                        modelHome.Course = (string)dr["Course"];
+                        modelHome.Cuisine = (string)dr["Cuisine"];
+                        modelHome.Ingredients = (string)dr["Ingredients"];
+                        modelHome.VideoURl = (string)dr["VideoURL"];
+
+                    }
+
+                    return View("DishAddEdit", modelHome);
+                }
+            }
+            return View("DishAddEdit");
+        }
+
+        #endregion
+
+
+        #region Save
+
+        public IActionResult DishSave(int HomeID, DishModel modelDish)
+        {
+
+            //if (modelHome.File != null)
+            //{
+            //    string FilePath = "wwwroot\\Upload\\HomeImages";
+            //    string path = Path.Combine(Directory.GetCurrentDirectory(), FilePath);
+
+            //    if (!Directory.Exists(path))
+            //        Directory.CreateDirectory(path);
+
+            //    string fileNameWithPath = Path.Combine(path, modelHome.File.FileName);
+            //    modelHome.Logo = FilePath.Replace("wwwroot\\", "/") + "/" + modelHome.File.FileName;
+
+            //    using (var stream = new FileStream(fileNameWithPath, FileMode.Create))
+            //    {
+            //        modelHome.File.CopyTo(stream);
+            //    }
+
+            //}
+
+
+            if (HomeID != 0 && modelDish.DishID == 0 && modelDish.RecipeID == 0)
+            {
+                DataTable dt = dalHome.dbo_PR_Dish_And_Recipe_Insert(HomeID,modelDish);
+                TempData["DishInsertMsg"] = "Record Inserted Successfully";
+            }
+            else
+            {
+                DataTable dt = dalHome.dbo_PR_Dish_UpdateByPK(HomeID, modelDish);
+
+                TempData["DishUpdateMsg"] = "Record Updated Successfully";
+            }
+
+            return RedirectToAction("DishAdd");
+
+        }
+        #endregion
     }
 }
