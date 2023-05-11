@@ -264,13 +264,12 @@ namespace The_Ghar.Areas.Admin_Side.Controllers
 
             if (HomeID != 0 && modelDish.DishID == 0 && modelDish.RecipeID == 0)
             {
-                DataTable dt = dalHome.dbo_PR_Dish_And_Recipe_Insert(HomeID,modelDish);
+                DataTable dt = dalHome.dbo_PR_Dish_And_Recipe_Insert(HomeID, modelDish);
                 TempData["DishInsertMsg"] = "Record Inserted Successfully";
             }
             else
             {
                 DataTable dt = dalHome.dbo_PR_Dish_UpdateByPK(HomeID, modelDish);
-
                 TempData["DishUpdateMsg"] = "Record Updated Successfully";
             }
 
